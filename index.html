@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <title>Music Player</title>
+    <link
+      rel="shortcut icon"
+      href="./assests/images/icons8-audio-bubbles-32.png"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main_overlay"></div>
+    <main>
+      <header>
+        <span class="material-symbols-outlined"> home </span>
+        <p>
+          <span data-song-title></span>
+          <span data-song-artist></span>
+        </p>
+        <span data-queue class="material-symbols-outlined"> queue_music </span>
+      </header>
+      <div class="player_banner">
+        <img data-posterurl src="" alt="" srcset="" />
+      </div>
+      <div class="player_controls">
+        <div class="player_seek">
+          <div class="duration">
+            <p data-runningTIme>0:00</p>
+            <p data-totaltime>0:20</p>
+          </div>
+          <input id="input_range" value="0" max="0" type="range" data-seek />
+        </div>
+        <div class="controls">
+          <div class="shuffle_button">
+            <span data-shuffle class="material-symbols-outlined">
+              shuffle
+            </span>
+          </div>
+          <div class="pause_play_controls">
+            <span data-prev class="material-symbols-outlined">
+              skip_previous
+            </span>
+
+            <span data-play class="material-symbols-outlined play-active">
+              play_arrow
+            </span>
+            <span data-pause class="material-symbols-outlined hidden">
+              pause_circle
+            </span>
+            <span data-next class="material-symbols-outlined"> skip_next </span>
+          </div>
+          <div class="repeat_button">
+            <span data-repeat class="material-symbols-outlined"> repeat </span>
+          </div>
+        </div>
+      </div>
+
+      <div data-items class="playlist_items animate__animated">
+        <div class="playerlist_navigation">
+          <span data-arrow-back class="material-symbols-outlined">
+            arrow_back
+          </span>
+        </div>
+        <ul data-playlist></ul>
+      </div>
+      <div data-playlistoverlay class="playlist_overlay"></div>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>
