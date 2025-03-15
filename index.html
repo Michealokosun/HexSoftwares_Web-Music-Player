@@ -26,7 +26,9 @@
       <header>
         <div class="volume_button">
           <div data-volume-button class="">
-            <span class="material-symbols-outlined"> volume_up </span>
+            <button style="background-color: transparent">
+              <span class="material-symbols-outlined"> volume_up </span>
+            </button>
           </div>
           <div data-volume-button class="hidden">
             <span class="material-symbols-outlined"> volume_off </span>
@@ -67,20 +69,26 @@
             </span>
           </div>
           <div class="pause_play_controls">
-            <span data-prev class="material-symbols-outlined">
-              skip_previous
-            </span>
+            <button data-prev>
+              <span class="material-symbols-outlined"> skip_previous </span>
+            </button>
 
-            <span data-play class="material-symbols-outlined play-active">
-              play_arrow
-            </span>
-            <span data-pause class="material-symbols-outlined hidden">
-              pause_circle
-            </span>
-            <span data-next class="material-symbols-outlined"> skip_next </span>
+            <button data-play class="play-active">
+              <span class="material-symbols-outlined"> play_arrow </span>
+            </button>
+            <button data-pause class="hidden">
+              <span class="material-symbols-outlined"> pause_circle </span>
+            </button>
+            <button data-next>
+              <span class="material-symbols-outlined"> skip_next </span>
+            </button>
           </div>
           <div class="repeat_button">
-            <span data-repeat class="material-symbols-outlined"> repeat </span>
+            <button>
+              <span data-repeat class="material-symbols-outlined">
+                repeat
+              </span>
+            </button>
           </div>
         </div>
       </div>

@@ -196,8 +196,14 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 100%;
 }
 
-.controls span {
+.controls button span {
   font-size: 2.4em;
+}
+
+.controls button {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
 }
 
 .playlist_overlay {
