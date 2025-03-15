@@ -98,10 +98,10 @@ header p span {
 
 .player_seek input[type="range"] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  height: 2px;
+  height: 1px;
   appearance: none;
   width: 100%; /* Specific width is required for Firefox. */
-  background: #c9c7c7; /* Otherwise white in Chrome */
+  background: white; /* Otherwise white in Chrome */
   border-radius: 10px;
 }
 
@@ -116,15 +116,54 @@ header p span {
   color: white;
   font-size: 1.2rem;
 }
+.volume_button {
+  position: relative;
+  display: flex;
+}
+
+.volume_button .hidden {
+  display: none;
+}
+
+.volume_button .input-volume {
+  position: absolute;
+  top: 600%;
+  left: -130%;
+  transform: rotate(-90deg);
+}
+
+.volume_button .hidden {
+  display: none;
+}
+
+.volume_button .hide-volume {
+  display: none;
+}
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border-radius: 100%;
-  padding: 10px 17px;
-  height: 36px;
-  width: 16px;
-  background: #414040;
+  padding: 10px 12px;
+  height: 25px;
+  width: 5px;
+  background: #f8f7f7;
   cursor: pointer;
+}
+
+.input-range-container {
+  position: relative;
+}
+.input-range-container .input-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0%, 210%);
+  background-color: white;
+  width: 0%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 5px;
+  z-index: -1;
 }
 
 .controls {
@@ -190,7 +229,7 @@ input[type="range"]::-webkit-slider-thumb {
   display: none;
   z-index: 20;
   transition: transform 1s ease-in-out;
-
+  display: none;
   overflow-y: scroll;
   height: 450px;
 }
@@ -259,4 +298,26 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .controls .repeat_button .repeat-active {
   color: white;
+}
+
+.player_banner img {
+  object-fit: cover;
+}
+
+@media screen and (min-width: 40rem) {
+  body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  main {
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .player_banner img {
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
 }

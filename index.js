@@ -114,27 +114,33 @@ playlist_back_btn.addEventListener("click", () => {
  */
 let currentSong = 0;
 const audio = new Audio();
-audio.src = MUSICPLAYLIST[currentSong].musicPath;
 let interval;
 /**
  * INITAL SONG TO PLAYER
  */
 window.addEventListener("load", () => {
   const poster = document.querySelector("[data-posterurl]");
+  const bodybg = document.getElementsByTagName("body");
   const songTitle = document.querySelector("[data-song-title]");
   const songArtist = document.querySelector("[data-song-artist]");
   poster.src = MUSICPLAYLIST[currentSong].posterUrl;
+  audio.src = MUSICPLAYLIST[currentSong].musicPath;
+
   poster.alt = MUSICPLAYLIST[currentSong].title;
+  bodybg[0].style.backgroundImage = `url(${MUSICPLAYLIST[currentSong].posterUrl})`;
   songTitle.textContent = MUSICPLAYLIST[currentSong].title;
   songArtist.textContent = MUSICPLAYLIST[currentSong].artist;
 });
 
 function updatePlayer(songobj) {
+  const bodybg = document.getElementsByTagName("body");
   const poster = document.querySelector("[data-posterurl]");
   const songTitle = document.querySelector("[data-song-title]");
   const songArtist = document.querySelector("[data-song-artist]");
   const play_btn = document.querySelector("[data-play]");
   const pause_btn = document.querySelector("[data-pause]");
+  bodybg[0].style.backgroundImage = `url(${songobj.posterUrl})`;
+
   poster.src = songobj.posterUrl;
   poster.alt = songobj.title;
   audio.src = songobj.musicPath;
@@ -162,8 +168,8 @@ playlist_item.forEach((item) => {
     currentSong = item.dataset.playlistitem;
     updatePlayer(MUSICPLAYLIST[currentSong]);
     playlist_overlay.classList.remove("showplaylist");
-
-    playlist_items.classList.remove("showplaylist");
+    playlist_items.classList.remove("animate__slideInUp");
+    playlist_items.classList.add("animate__slideInDown");
   });
 });
 
@@ -210,29 +216,31 @@ function formatTime(duration) {
 
 const runningTime = document.querySelector("[data-runningTIme]");
 const seek = document.querySelector("#input_range");
+const inputfill = document.querySelector("[data-fill]");
 function updateSeekwhileplaying() {
   seek.value = audio.currentTime;
   runningTime.textContent = formatTime(audio.currentTime);
+  const fillpercentage = (seek.value / seek.max) * 100;
+  inputfill.style.width = `${Math.ceil(fillpercentage)}%`;
   if (audio.ended) {
+    inputfill.style.width = "0%";
     if (isrepeat) {
       audio.currentTime = 0;
       audio.play();
     } else {
       Nextbutton();
     }
-    // audio.pause();
-    // play_btn.classList.remove("hidden");
-    // pause_btn.classList.add("hidden");
-    // clearInterval(interval);
-    // seek.value = 0;
-    // runningTime.textContent = "0:00";
   }
 }
 
 function updateseek(e) {
+  const inputfill = document.querySelector("[data-fill]");
   const value = e.target.value;
+  const max = e.target.max;
   audio.currentTime = value;
   runningTime.textContent = formatTime(value);
+  const filperentage = (value / max) * 100;
+  inputfill.style.width = `${Math.ceil(filperentage)}%`;
 }
 
 seek.addEventListener("input", updateseek);
@@ -312,3 +320,32 @@ function toggleRepeat() {
 }
 
 repeatButton.addEventListener("click", toggleRepeat);
+
+/**
+ *  VOLUME
+ *
+ * ADJUST THE VOLUME OF THE MUSIC
+ *
+ */
+const volumerangeinput = document.querySelector("[data-volume]");
+const volumeicons = document.querySelectorAll("[data-volume-button]");
+console.log(volumeicons[0]);
+
+function adjustvolume(e) {
+  audio.volume = e.target.value;
+  if (audio.volume !== 0) {
+    volumeicons[1].classList.add("hidden");
+    volumeicons[0].classList.remove("hidden");
+    console.log("muted");
+  } else {
+    volumeicons[0].classList.add("hidden");
+    volumeicons[1].classList.remove("hidden");
+  }
+
+  console.log(e.target.value);
+}
+
+volumerangeinput.addEventListener("input", adjustvolume);
+addEvent(volumeicons, "click", () => {
+  volumerangeinput.classList.toggle("hide-volume");
+});
